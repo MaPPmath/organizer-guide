@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\parskip=0.8em
+\pagenumbering{gobble}
+\usepackage{tikz}
+\newcommand{\codeC}[1]{
+\draw (0.5,0.5) circle (0.5);
+\begin{scope}[shift={(0.3,0.3)},scale=0.4]
+#1
+\end{scope}
+}
+\newcommand{\codeT}[1]{
+\draw (0,0) -- (1,0) -- (0.5,1) -- (0,0);
+\begin{scope}[shift={(0.3,0.1)},scale=0.4]
+#1
+\end{scope}
+}
+\newcommand{\codeTR}[1]{
+\draw (0,0) -- (0,1) -- (1,0.5) -- (0,0);
+\begin{scope}[shift={(0.1,0.3)},scale=0.4]
+#1
+\end{scope}
+}
+\newcommand{\codeTL}[1]{
+\draw (1,0) -- (1,1) -- (0,0.5) -- (1,0);
+\begin{scope}[shift={(0.5,0.3)},scale=0.4]
+#1
+\end{scope}
+}
+\newcommand{\codeS}[1]{
+\draw (0,0) -- (1,0) -- (1,1) -- (0,1) -- (0,0);
+\begin{scope}[shift={(0.3,0.3)},scale=0.4]
+#1
+\end{scope}
+}
+\begin{document}
+\input{stone}
+\end{document}

@@ -1,0 +1,75 @@
+%https://tex.stackexchange.com/a/302908
+\documentclass{article}
+\usepackage{fp,amssymb,graphicx,xcolor}
+\makeatletter
+\def\strippt{\strip@pt}
+\makeatother
+\newsavebox\foobox
+\newcommand\slbox[2]{%
+  \slantbox[\result]{#2}%
+}%
+\newcommand{\slantbox}[2][30]{%
+        \mbox{%
+        \global\sbox{\foobox}{\textcolor{black}{#2}}%
+        \hskip\wd\foobox
+        \pdfsave
+        \pdfsetmatrix{1 0 #1 1}%
+        \llap{\usebox{\foobox}}%
+        \pdfrestore
+}}
+\newcommand\shslbox[3]{\slbox{#1}{\scalebox{#3}{#2}}}
+\newlength\yvp
+\newlength\xvp
+\newlength\yvpref
+\newlength\xvpref
+\yvpref 50pt\relax
+\xvpref -75pt\relax
+\xvp=\xvpref\relax
+\yvp=.3\yvpref\relax
+\newcommand\nextletter[1]{%
+  \FPdiv{\result}{\strippt\xvp}{-\strippt\yvp}%
+  \shslbox{\result}{#1}{\themagf}%
+  \addtolength{\xvp}{\wd\foobox}%
+}
+\newcommand\nextword[1]{\nextwordhelp #1\relax}
+\def\nextwordhelp#1#2\relax{%
+  \nextletter{#1}%
+  \ifx\relax#2\relax\sbox{\foobox}{\scalebox{\themagf}{~}}\addtolength{\xvp}{\wd\foobox}\usebox{\foobox}%
+  \else\nextwordhelp#2\relax\fi%  
+}
+\newcommand\nextline[1]{%
+  \parallax\setmagf\nextlinehelp #1 \relax \relax%
+  \vspace{-\dimexpr\baselineskip-\themagf\baselineskip}\par%
+  \addtolength\yvp{\themagf\baselineskip}\xvp\xvpref\relax%
+  \ignorespaces%
+}
+\def\nextlinehelp#1 #2\relax{%
+  \nextword{#1}%
+  \ifx\relax#2\relax\else\nextlinehelp #2\relax\fi%
+}
+\newcommand\parallax{%
+  \FPdiv{\result}{\strippt\yvp}{\strippt\yvpref}%
+  \FPsub{\result}{1}{\result}%
+  \hspace{-\result\xvpref}\addtolength{\xvp}{-\result\xvpref}%
+}
+\def\setmagf{\global\FPdiv{\themagf}{\strippt\yvp}{\strippt\yvpref}} 
+\parindent 0pt
+
+\pagenumbering{gobble}
+
+\begin{document}
+\pagecolor{white}\sffamily\bfseries%
+
+\nextline{For a time I tried carefully to detail biographies}
+\nextline{via large crawling textboxes.}
+\nextline{~}
+\nextline{Lamentably, composing all of the anecdotes}
+\nextline{when curbed by finite room, the current} 
+\nextline{strategy~ now~ is~ cruelly~ killing~ sound}
+\nextline{handwriting.}
+\nextline{~}
+\nextline{To~ sidestep~ probable~ oversights~ I}
+\nextline{intensely loathe, I entreat humankind,} 
+\nextline{ban laughable cuneiform!}
+
+\end{document}

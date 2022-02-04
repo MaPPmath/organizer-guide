@@ -1,0 +1,49 @@
+\documentclass{puzzlehunt}
+\usetikzlibrary{calc,shapes,patterns,arrows}
+
+\usepackage[puttinydots]{braille}
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+\newcommand{\wedn}{}
+\usepackage{txfonts}
+\usepackage{tikz}
+
+\phSetTitle{MaPP Challenge Overview}
+\phSetAuthor{Mathematical Puzzle Programs}
+% \phUseAuthorWithTitle
+
+%\phMarkDraft % comment out to remove draft watermark
+\phShowPageNumbers % comment out to hide page numbers
+
+% replace these with your image files
+\phSetBannerLogo{assets/mapp-banner}
+\phSetSquareLogo{assets/mapp-square}
+
+\input{custom-commands}
+
+\begin{document}
+
+\phTitlePage % Prints title page.
+\phTableOfContents % Prints table of contents
+
+\phChapter{Campus Guidelines}
+
+  \input{about/campus}
+
+\phChapterWorksheet{How to Play}{Rules}
+
+  \input{about/rules}
+
+\phChapterWorksheet{Game Resources}{Code Sheet}
+
+  \input{about/reference}
+
+  \phWorksheet{Campus Map - University of South Alabama}
+
+  \input{about/campus-map}
+
+
+\newpage
+\pagenumbering{gobble}
+\input{about/logo-page}
+\end{document}
